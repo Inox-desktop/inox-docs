@@ -54,7 +54,7 @@ appearance = "system"              # light | dark | system（默认）
 | 数据 | `$XDG_DATA_HOME/inox` | `$HOME/.local/share/inox` |
 | 状态 | `$XDG_STATE_HOME/inox` | `$HOME/.local/state/inox` |
 | 缓存 | `$XDG_CACHE_HOME/inox` | `$HOME/.cache/inox` |
-| 运行时 | `$XDG_RUNTIME_DIR`（不再追加 `inox`） | 无回退 |
+| 运行时 | `$XDG_RUNTIME_DIR` 与其下的 `inox` 子目录 | 无回退 |
 
 按规范，空值与相对路径的环境变量视为无效并回退到默认值；`$XDG_RUNTIME_DIR` 例外，规范没有为它定义回退，因此它必须是已存在的绝对路径目录。
 
