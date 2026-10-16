@@ -4,14 +4,14 @@
 
 ## 职责
 
-项目文档站点（mdBook）。所属层级：**L1**。
+用户与开发者文档站点（mdBook）。所属层级：**L1**。
 
 ## 仓库特有约束
 
-- 默认禁止 `unsafe`：`Cargo.toml` 中 `[lints.rust] unsafe_code = "forbid"`。
-- 非测试路径禁止 `unwrap()` / `expect()` / `panic!()` / `todo!()` / `unimplemented!()`。
-- 日志统一使用 `tracing`，禁止 `println!` / `eprintln!`。
-- M0 阶段**不引入 Inox 跨仓库依赖**：跨仓库依赖在首次需要它的里程碑中引入，并按根级 §8 使用锁定 `tag` 的 git 依赖。
+- 本仓库**不含 Rust 代码、无 `Cargo.toml`**：因此 `unsafe` / `unwrap()` / `tracing` 等 Rust 相关规则在本仓库不适用，本仓库也不参与依赖图与 `cargo-deny` 检查。
+- 文档语言使用中文（面向用户的文档与 PRD 用中文）；命令、标识符与代码片段保持英文原样。
+- 保持改动聚焦：只维护文档内容与 mdBook 配置，不引入构建脚本或额外工具链。
+- 新增或修改文档后，必须保证 `mdbook build` 可通过（CI 以构建失败为红）。
 
 ## 主要依赖
 
@@ -28,17 +28,15 @@
 
 ## 测试要求
 
-- 纯逻辑必须有单元测试（`#[cfg(test)]`）。
-- 测试代码不受“禁止 unwrap/expect/panic”约束。
-- M0 骨架阶段暂无业务逻辑，测试随功能里程碑补充。
+- 本仓库无单元测试要求，文档正确性由 CI 的 `mdbook build` 保证。
+- 章节之间的链接必须有效，`src/SUMMARY.md` 必须与实际章节文件一致。
 
 ## 目录结构
 
 ```
-src/            源码（lib.rs 库入口 / main.rs 可执行入口）
-tests/          集成测试（按需创建）
-.github/        CI 工作流
-deny.toml       cargo-deny 依赖与许可证策略
+src/            mdBook 源（SUMMARY.md 与各章节 .md）
+book.toml       mdBook 配置
+.github/        CI 工作流（mdbook build）
 ```
 
 ## 提交信息格式
