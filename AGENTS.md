@@ -34,10 +34,20 @@
 ## 目录结构
 
 ```
-src/            mdBook 源（SUMMARY.md 与各章节 .md）
+src/
+  SUMMARY.md          章节目录（必须与实际章节文件保持一致）
+  introduction.md     简介与权威来源索引
+  architecture/       分层、组件仓库、协议矩阵、ADR 流程
+  configuration/      配置目录布局、合成器配置、主题与设计令牌
+  development/        协作流程、CI、测试策略、依赖管理
+  usage/              构建与运行
+  roadmap.md          里程碑与当前状态
+  glossary.md         术语表
 book.toml       mdBook 配置
 .github/        CI 工作流（mdbook build）
 ```
+
+章节之间用相对路径互链；引用其他仓库时一律使用绝对 URL（`https://github.com/Inox-desktop/...`）。描述组件现状必须可在对应仓库中核对：尚未实现的组件要明确标注为「骨架」「计划中」或「尚未实现」。
 
 ## 提交信息格式
 
